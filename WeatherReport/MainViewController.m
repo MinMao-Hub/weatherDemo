@@ -31,25 +31,27 @@
     [[WeatherDB shareInstance] createTable];
     
     
-    UIBarButtonItem *history_item = [[UIBarButtonItem alloc] initWithTitle:@"历史记录" style:UIBarButtonItemStylePlain target:self action:@selector(itemClicked)];
+    UIBarButtonItem *history_item = [[UIBarButtonItem alloc] initWithTitle:@"我的城市" style:UIBarButtonItemStylePlain target:self action:@selector(itemClicked)];
     self.navigationItem.rightBarButtonItem = history_item;
     
     //添加label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 64, 120, 30)];
     label.text = @"请选择城市:";
-    label.layer.cornerRadius = 5;
-    label.layer.masksToBounds = YES;
-    label.layer.borderWidth = 1;
-    label.layer.borderColor = [UIColor yellowColor].CGColor;
+//    label.layer.cornerRadius = 5;
+//    label.layer.masksToBounds = YES;
+//    label.layer.borderWidth = 1;
+//    label.layer.borderColor = [UIColor yellowColor].CGColor;
     [self.view addSubview:label];
     
     //添加选择器
-    pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 95, self.view.frame.size.width, 200)];
+    pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 95, kScreenWidth, kScreenHeight - 200)];
     pickerView.showsSelectionIndicator = YES;
-    pickerView.layer.cornerRadius = 5;
-    pickerView.layer.masksToBounds = YES;
-    pickerView.layer.borderWidth = 1;
-    pickerView.layer.borderColor = [UIColor greenColor].CGColor;
+    pickerView.backgroundColor = [UIColor clearColor];
+    [pickerView setTintColor:[UIColor whiteColor]];
+//    pickerView.layer.cornerRadius = 5;
+//    pickerView.layer.masksToBounds = YES;
+//    pickerView.layer.borderWidth = 1;
+//    pickerView.layer.borderColor = [UIColor greenColor].CGColor;
     [self.view addSubview:pickerView];
     
     
@@ -79,15 +81,15 @@
     
     //添加button
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(100, 340, 100, 30);
-    [btn setTitle:@"确  定" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    btn.frame = CGRectMake((kScreenWidth - 100) / 2, kScreenHeight - 80, 100, 30);
+    [btn setTitle:@"查  询" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor colorWithRed:0.388 green:0.690 blue:0.882 alpha:1.00] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(btnClicked) forControlEvents:UIControlEventTouchUpInside];
     btn.layer.cornerRadius = 15;
     btn.layer.masksToBounds = YES;
     
     btn.layer.borderWidth = 2;
-    btn.layer.borderColor = [UIColor redColor].CGColor;
+    btn.layer.borderColor = [UIColor colorWithRed:0.388 green:0.690 blue:0.882 alpha:1.00].CGColor;
     
     [self.view addSubview:btn];
 
@@ -121,17 +123,14 @@
    
     //解析城市天气数据
     NetRequest *myRequest = [[NetRequest alloc]init];
-    WeatherModel *model = [[WeatherModel alloc] init]; 
-    model = [myRequest startRequest:cityID];
-    
-    
-    //将解析后的数据存入数据库 
-    [[WeatherDB shareInstance] addWeather:model];
-    
-   
-    //跳转到显示城市天气的页面
-    City_WeatherViewController *weatherVC = [[City_WeatherViewController alloc] init];
-    [self.navigationController pushViewController:weatherVC animated:YES];
+    [myRequest startRequestWithCityId:cityID andCompletinonhandler:^(WeatherModel *model) {
+        
+        [[WeatherDB shareInstance] addWeather:model];
+        
+        //跳转到显示城市天气的页面
+        City_WeatherViewController *weatherVC = [[City_WeatherViewController alloc] init];
+        [self.navigationController pushViewController:weatherVC animated:YES];
+    }];
 }
 
 #pragma mark - UIPickerViewDelegate

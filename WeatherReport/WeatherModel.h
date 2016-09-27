@@ -18,5 +18,8 @@
 @property(nonatomic,copy)NSString *SD;    //湿度
 @property(nonatomic,copy)NSString *WSE;   //风力
 @property(nonatomic,copy)NSString *time;  //时间
+@property(nonatomic,copy)NSString *njd;   //能见度
+@property(nonatomic,copy)NSString *qy;    //气压
+@property(nonatomic,copy)NSString *rain;  //降雨量
 
 @end

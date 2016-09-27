@@ -15,6 +15,6 @@
 @property(nonatomic,strong)NSMutableArray *mutableArray;
 
 //开始网络请求
--(WeatherModel *)startRequest:(NSString *)cityid;
+- (void)startRequestWithCityId:(NSString *)cityid andCompletinonhandler:(void (^)(WeatherModel *model))complete;
 
 @end

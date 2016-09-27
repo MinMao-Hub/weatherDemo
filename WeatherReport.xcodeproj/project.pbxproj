@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19663AE419EBF86600241F3B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19663AE219EBF86600241F3B /* icon.png */; };
-		19663AE519EBF86600241F3B /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 19663AE319EBF86600241F3B /* default.png */; };
-		19663AE819EBF8A200241F3B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19663AE719EBF8A200241F3B /* icon.png */; };
+		198B49911D9A6ACF005526EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 198B49901D9A6ACF005526EF /* Images.xcassets */; };
 		19E457991A36CC6400A70F75 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E457981A36CC6400A70F75 /* libxml2.2.dylib */; };
 		373E88BB19B73BE600A6B6F7 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 373E88BA19B73BE600A6B6F7 /* HistoryViewController.m */; };
 		37771BC119B462F40009246C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37771BC019B462F40009246C /* DetailViewController.m */; };
@@ -50,9 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		19663AE219EBF86600241F3B /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		19663AE319EBF86600241F3B /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
-		19663AE719EBF8A200241F3B /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		198B49901D9A6ACF005526EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		19E457981A36CC6400A70F75 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		373E88B919B73BE500A6B6F7 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		373E88BA19B73BE600A6B6F7 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
@@ -128,7 +124,6 @@
 		3777287019B062AC005D6C80 = {
 			isa = PBXGroup;
 			children = (
-				19663AE719EBF8A200241F3B /* icon.png */,
 				3777288319B062AE005D6C80 /* WeatherReport */,
 				3777289B19B062B0005D6C80 /* WeatherReportTests */,
 				3777287E19B062AE005D6C80 /* Frameworks */,
@@ -166,13 +161,12 @@
 			isa = PBXGroup;
 			children = (
 				37774FE519B868A200AAE6B8 /* bj.jpg */,
-				19663AE219EBF86600241F3B /* icon.png */,
-				19663AE319EBF86600241F3B /* default.png */,
 				3777F4C719B1B8C800DE791A /* Controller */,
 				3777F4C519B1B8BA00DE791A /* View */,
 				3777F4B019B19B1D00DE791A /* Model */,
 				3777288C19B062AE005D6C80 /* AppDelegate.h */,
 				3777288D19B062AE005D6C80 /* AppDelegate.m */,
+				198B49901D9A6ACF005526EF /* Images.xcassets */,
 				3777288419B062AE005D6C80 /* Supporting Files */,
 			);
 			path = WeatherReport;
@@ -317,11 +311,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3777288819B062AE005D6C80 /* InfoPlist.strings in Resources */,
+				198B49911D9A6ACF005526EF /* Images.xcassets in Resources */,
 				37791C5C19B2B424004B7917 /* City.plist in Resources */,
 				37774FE619B868A200AAE6B8 /* bj.jpg in Resources */,
-				19663AE419EBF86600241F3B /* icon.png in Resources */,
-				19663AE519EBF86600241F3B /* default.png in Resources */,
-				19663AE819EBF8A200241F3B /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +447,8 @@
 		377728A719B062B0005D6C80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeatherReport/WeatherReport-Prefix.pch";
 				INFOPLIST_FILE = "WeatherReport/WeatherReport-Info.plist";
@@ -466,6 +460,8 @@
 		377728A819B062B0005D6C80 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeatherReport/WeatherReport-Prefix.pch";
 				INFOPLIST_FILE = "WeatherReport/WeatherReport-Info.plist";

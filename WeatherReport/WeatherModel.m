@@ -10,6 +10,6 @@
 
 @implementation WeatherModel
 
-@synthesize city,cityid,temp,WD,WS,WSE,SD,time;
+@synthesize city,cityid,temp,WD,WS,WSE,SD,time,njd,qy,rain;
 
 @end
