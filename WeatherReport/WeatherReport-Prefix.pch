@@ -11,8 +11,14 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #define kScreenWidth   [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight  [UIScreen mainScreen].bounds.size.height
+
+
+#define GCD_Main(voidBlock)         dispatch_async(dispatch_get_main_queue(), voidBlock)
+#define GCD_async(voidBlock)        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), voidBlock)
+#define Operation_Main(voidBlock)   [[NSOperationQueue mainQueue] addOperationWithBlock:voidBlock]
 
 #endif

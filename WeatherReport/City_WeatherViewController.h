@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WeatherModel.h"
 
 @interface City_WeatherViewController : UITableViewController
-{
-    NSArray *data;
-}
+
+@property (nonatomic, strong) WeatherModel *aModel;
+
 @end

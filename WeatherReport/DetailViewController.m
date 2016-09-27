@@ -17,7 +17,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.title = @"历史天气";
+        self.title = @"城市天气";
             
     }
     return self;
@@ -39,6 +39,8 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    [self refresh];
+    
 }
 
 
@@ -47,19 +49,17 @@
 {
    // 找到该城市的天气情况
     HistoryViewController * myHistory =[[HistoryViewController alloc]init];        
-    NSMutableArray *data1 = [[WeatherDB shareInstance]findWeather];        
+    NSMutableArray *data1 = [[WeatherDB shareInstance] findWeather];
     WeatherModel * model= [data1 objectAtIndex:[myHistory equal]]; 
     
         
     //重新请求网络数据
     NetRequest *netRequest = [[NetRequest alloc] init];
-    model = [netRequest startRequest:model.cityid];
-    
-    
-    //更新数据库中的数据
-    [[WeatherDB shareInstance] updateWeather:model];
-    [self.tableView reloadData];
-    
+    [netRequest startRequestWithCityId:model.cityid andCompletinonhandler:^(WeatherModel *model) {
+        //更新数据库中的数据
+        [[WeatherDB shareInstance] updateWeather:model];
+        [self.tableView reloadData];
+    }];
 }
 
 
@@ -72,7 +72,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -97,33 +97,45 @@
             cell.textLabel.text = @"城市:";
             cell.detailTextLabel.text = model.city;
             break;
+//        case 1:
+//            cell.textLabel.text = @"城市ID:";
+//            cell.detailTextLabel.text = model.cityid;
+//            break;
         case 1:
-            cell.textLabel.text = @"城市ID:";
-            cell.detailTextLabel.text = model.cityid;
-            break;
-        case 2:
             cell.textLabel.text = @"温度:";
             cell.detailTextLabel.text = model.temp;
             break;
-        case 3:
+        case 2:
             cell.textLabel.text = @"风向:";
             cell.detailTextLabel.text = model.WD;
             break;
-        case 4:
+        case 3:
             cell.textLabel.text = @"风级:";
             cell.detailTextLabel.text = model.WS;
             break;
-        case 5:
+        case 4:
             cell.textLabel.text = @"湿度:";
             cell.detailTextLabel.text = model.SD;
             break;
-        case 6:
+        case 5:
             cell.textLabel.text = @"风力:";
             cell.detailTextLabel.text = model.WSE;
             break;
-        case 7:
+        case 6:
             cell.textLabel.text = @"更新时间:";
             cell.detailTextLabel.text = model.time;
+            break;
+        case 7:
+            cell.textLabel.text = @"能见度:";
+            cell.detailTextLabel.text = model.njd;
+            break;
+        case 8:
+            cell.textLabel.text = @"气压:";
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@百帕",model.qy];
+            break;
+        case 9:
+            cell.textLabel.text = @"雨:";
+            cell.detailTextLabel.text = [model.rain isEqualToString:@"1"] ? @"有雨" : @"无";
             break;
             
         default:

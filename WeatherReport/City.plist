@@ -2,24 +2,44 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>直辖市</key>
+	<key>北京</key>
 	<array>
 		<dict>
 			<key>北京</key>
 			<string>101010100</string>
+		</dict>
+	</array>
+	<key>上海</key>
+	<array>
+		<dict>
 			<key>上海</key>
 			<string>101020100</string>
+		</dict>
+	</array>
+	<key>天津</key>
+	<array>
+		<dict>
 			<key>天津</key>
 			<string>101030100</string>
+		</dict>
+	</array>
+	<key>重庆</key>
+	<array>
+		<dict>
 			<key>重庆</key>
 			<string>101040100</string>
 		</dict>
 	</array>
-	<key>特别行政区</key>
+	<key>香港</key>
 	<array>
 		<dict>
 			<key>香港</key>
 			<string>101320101</string>
+		</dict>
+	</array>
+	<key>澳门</key>
+	<array>
+		<dict>
 			<key>澳门</key>
 			<string>101330101</string>
 		</dict>

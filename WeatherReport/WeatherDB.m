@@ -21,15 +21,15 @@ static WeatherDB * instance;
 
 - (void) createTable
 {
-    NSString * sql = @"CREATE TABLE IF NOT EXISTS Weather(city TEXT,cityid TEXT primary key,temp TEXT,WD TEXT,WS TEXT,SD TEXT,WSE TEXT,time TEXT)";
+    NSString * sql = @"CREATE TABLE IF NOT EXISTS Weather(city TEXT,cityid TEXT primary key,temp TEXT,WD TEXT,WS TEXT,SD TEXT,WSE TEXT,time TEXT,njd TEXT,qy TEXT,rain TEXT)";
     [self createTable:sql];
 }
 
 - (BOOL) addWeather:(WeatherModel *)weatherModel
 {
-    NSString * sql = @"INSERT OR REPLACE INTO Weather(city,cityid,temp,WD,WS,SD,WSE,time) VALUES(?,?,?,?,?,?,?,?)";
+    NSString * sql = @"INSERT OR REPLACE INTO Weather(city,cityid,temp,WD,WS,SD,WSE,time,njd,qy,rain) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     
-    NSArray * params = [NSArray arrayWithObjects:weatherModel.city,weatherModel.cityid,weatherModel.temp,weatherModel.WD,weatherModel.WS,weatherModel.SD,weatherModel.WSE,weatherModel.time, nil];
+    NSArray * params = [NSArray arrayWithObjects:weatherModel.city,weatherModel.cityid,weatherModel.temp,weatherModel.WD,weatherModel.WS,weatherModel.SD,weatherModel.WSE,weatherModel.time,weatherModel.njd,weatherModel.qy,weatherModel.rain, nil];
     return [self dealData:sql paramsarray:params];
     
 }
@@ -37,17 +37,17 @@ static WeatherDB * instance;
 //更新天气
 - (BOOL) updateWeather:(WeatherModel *)weatherModel
 {
-   NSString * sql = [NSString stringWithFormat:@"UPDATE Weather SET temp = '%@',WD = '%@',WS = '%@',SD = '%@',WSE = '%@',time = '%@' WHERE cityid = '%@'",weatherModel.temp,weatherModel.WD,weatherModel.WS,weatherModel.SD,weatherModel.WSE,weatherModel.time,weatherModel.cityid];
+   NSString * sql = [NSString stringWithFormat:@"UPDATE Weather SET temp = '%@',WD = '%@',WS = '%@',SD = '%@',WSE = '%@',time = '%@',njd = '%@',qy = '%@',rain = '%@' WHERE cityid = '%@'",weatherModel.temp,weatherModel.WD,weatherModel.WS,weatherModel.SD,weatherModel.WSE,weatherModel.time,weatherModel.njd,weatherModel.qy,weatherModel.rain,weatherModel.cityid];
     
-    NSArray * params = [NSArray arrayWithObjects:weatherModel.city,weatherModel.cityid,weatherModel.temp,weatherModel.WD,weatherModel.WS,weatherModel.SD,weatherModel.WSE,weatherModel.time, nil];
+    NSArray * params = [NSArray arrayWithObjects:weatherModel.city,weatherModel.cityid,weatherModel.temp,weatherModel.WD,weatherModel.WS,weatherModel.SD,weatherModel.WSE,weatherModel.time,weatherModel.njd,weatherModel.qy,weatherModel.rain, nil];
     return [self dealData:sql paramsarray:params];
     
 }
 
 -(NSMutableArray *) findWeather
 {
-    NSString * sql = @"SELECT city,cityid,temp,WD,WS,SD,WSE,time FROM Weather";
-    NSArray * data = [self selectData:sql columns:8];
+    NSString * sql = @"SELECT city,cityid,temp,WD,WS,SD,WSE,time,njd,qy,rain FROM Weather";
+    NSArray * data = [self selectData:sql columns:11];
     
     NSMutableArray * weathers = [[NSMutableArray alloc] init];
     
@@ -60,6 +60,9 @@ static WeatherDB * instance;
         NSString * SD = [row objectAtIndex:5];
         NSString * WSE = [row objectAtIndex:6];
         NSString * time = [row objectAtIndex:7];
+        NSString * njd = [row objectAtIndex:8];
+        NSString * qy = [row objectAtIndex:9];
+        NSString * rain = [row objectAtIndex:10];
         
         
         WeatherModel * weather = [[WeatherModel alloc] init];
@@ -71,6 +74,9 @@ static WeatherDB * instance;
         weather.SD = SD;
         weather.WSE = WSE;
         weather.time = time;
+        weather.njd = njd;
+        weather.qy = qy;
+        weather.rain = rain;
         
         [weathers addObject:weather];
     }
@@ -81,7 +87,7 @@ static WeatherDB * instance;
 //根据城市名查询天气
 -(NSMutableArray *) findWeatherByCity:(NSString *)city
 {
-    NSString * sql = [NSString stringWithFormat:@"SELECT cityid,temp,WD,WS,SD,WSE,time FROM Weather WHERE city = '%@'",city];
+    NSString * sql = [NSString stringWithFormat:@"SELECT cityid,temp,WD,WS,SD,WSE,timenjd,qy,rain FROM Weather WHERE city = '%@'",city];
     NSArray * data = [self selectData:sql columns:8];
     
     NSMutableArray * weathers = [[NSMutableArray alloc] init];
@@ -95,6 +101,9 @@ static WeatherDB * instance;
         NSString * SD = [row objectAtIndex:5];
         NSString * WSE = [row objectAtIndex:6];
         NSString * time = [row objectAtIndex:7];
+        NSString * njd = [row objectAtIndex:8];
+        NSString * qy = [row objectAtIndex:9];
+        NSString * rain = [row objectAtIndex:10];
         
         
         WeatherModel * weather = [[WeatherModel alloc] init];
@@ -106,6 +115,9 @@ static WeatherDB * instance;
         weather.SD = SD;
         weather.WSE = WSE;
         weather.time = time;
+        weather.njd = njd;
+        weather.qy = qy;
+        weather.rain = rain;
         
         [weathers addObject:weather];
     }
@@ -131,6 +143,9 @@ static WeatherDB * instance;
         NSString * SD = [row objectAtIndex:5];
         NSString * WSE = [row objectAtIndex:6];
         NSString * time = [row objectAtIndex:7];
+        NSString * njd = [row objectAtIndex:8];
+        NSString * qy = [row objectAtIndex:9];
+        NSString * rain = [row objectAtIndex:10];
         
         
         WeatherModel * weather = [[WeatherModel alloc] init];
@@ -142,6 +157,10 @@ static WeatherDB * instance;
         weather.SD = SD;
         weather.WSE = WSE;
         weather.time = time;
+        weather.njd = njd;
+        weather.qy = qy;
+        weather.rain = rain;
+        
         
         [weathers addObject:weather];
     }

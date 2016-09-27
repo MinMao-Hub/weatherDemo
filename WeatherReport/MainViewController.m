@@ -69,7 +69,7 @@
     
     
     //省份名数据
-    self.provinces = [self.pickerData allKeys];
+    self.provinces = [[self.pickerData allKeys] sortedArrayUsingSelector:@selector(compare:)];
     
     //默认取出第一个省的所有市的数据
     NSArray *proArr = [self.provinces objectAtIndex:0];  //取出第一个省
@@ -123,13 +123,21 @@
    
     //解析城市天气数据
     NetRequest *myRequest = [[NetRequest alloc]init];
+    MBProgressHUD *loadHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    loadHud.backgroundColor = [UIColor colorWithRed:0.388 green:0.690 blue:0.882 alpha:1.00];
+    loadHud.labelText = @"正在查询，请稍候...";
+    loadHud.labelFont = [UIFont systemFontOfSize:18];
+    loadHud.labelColor = [UIColor whiteColor];
     [myRequest startRequestWithCityId:cityID andCompletinonhandler:^(WeatherModel *model) {
-        
-        [[WeatherDB shareInstance] addWeather:model];
-        
-        //跳转到显示城市天气的页面
-        City_WeatherViewController *weatherVC = [[City_WeatherViewController alloc] init];
-        [self.navigationController pushViewController:weatherVC animated:YES];
+        GCD_Main(^{
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if (model.cityid != nil && model.cityid.length != 0) {
+                //跳转到显示城市天气的页面
+                City_WeatherViewController *weatherVC = [[City_WeatherViewController alloc] init];
+                weatherVC.aModel = model;
+                [self.navigationController pushViewController:weatherVC animated:YES];
+            }
+        });
     }];
 }
 

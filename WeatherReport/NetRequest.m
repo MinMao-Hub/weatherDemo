@@ -48,6 +48,7 @@
             
             complete(model);
         }else{
+            NSLog(@"request error : %@",error.description);
             complete(nil);
         }
         
