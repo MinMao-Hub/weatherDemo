@@ -136,6 +136,14 @@
                 City_WeatherViewController *weatherVC = [[City_WeatherViewController alloc] init];
                 weatherVC.aModel = model;
                 [self.navigationController pushViewController:weatherVC animated:YES];
+            }else{
+                UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未查询到该城市的天气信息，请查询其他城市" preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:NULL];
+                
+                [alertVC addAction:action];
+                
+                [self presentViewController:alertVC animated:YES completion:NULL];
             }
         });
     }];
