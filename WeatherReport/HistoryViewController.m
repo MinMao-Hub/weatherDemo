@@ -253,7 +253,7 @@ static NSInteger i;
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     //如果未进行搜索，则显示所有的城市内容
     if ((search.text.length == 0)) {
-        data = [[WeatherDB shareInstance]findWeather];
+        data = [[WeatherDB shareInstance] findWeather];
         model = [data objectAtIndex:indexPath.row];
         i = indexPath.row;
     }
